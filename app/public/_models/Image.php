@@ -1,6 +1,6 @@
 <?php
 // inkludera föräldern så att man kan ärva
-include_once("_models/Database.php");
+include_once "_models/Database.php";
 
 // vi vill göra en klass som ärver från Database.php för att följer Anders kodkonverstion
 // File Model ska ansvara för att allt som har göra med tabellen 'files'
@@ -28,8 +28,8 @@ class Image extends Database
         $sql = "CREATE TABLE IF NOT EXISTS image (
         id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
         url varchar(255) NOT NULL,
-        page_id int(11) NOT NULL
-        KEY `page_id` (`page_id`)
+        page_id int(11) NOT NULL,
+        KEY `page_id` (`page_id`),
         CONSTRAINT `image_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `page` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
          )";
 
@@ -38,7 +38,7 @@ class Image extends Database
         $stmt->execute();
     }
 
-    public function add_one($url, $page_id)
+    public function add_image($url, $page_id)
     {
         $stmt = $this->db->prepare("INSERT INTO image ( url, page_id) VALUES ( ?, ?)");
         $stmt->execute([$url, $page_id]);
@@ -49,9 +49,8 @@ class Image extends Database
 
     public function getImagesByPageId($page_id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM image WHERE page_id = ?");
+        $stmt = $this->db->prepare("SELECT * FROM image JOIN page ON image.page_id = page.id ");
         $stmt->execute([$page_id]);
-
         return $stmt->fetchAll();
     }
 }

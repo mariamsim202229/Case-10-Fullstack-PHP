@@ -1,6 +1,6 @@
 <?php
     // inkludera föräldern så att man kan ärva
-    include_once("_models/Database.php");
+    include_once "_models/Database.php";
 
     // vi vill göra en klass som ärver från Database.php för att följer Anders kodkonverstion
     // File Model ska ansvara för att allt som har göra med tabellen 'users'
@@ -46,7 +46,7 @@
 
         public function authenticate($username, $password) {
             // send to database
-            $stmt = "SELECT * FROM `users` WHERE `username` = '$username'";
+            $stmt = "SELECT * FROM `users` WHERE `username` = '$username' ";
             $result = $this->db->query($stmt);
             
             $user = $result->fetch();

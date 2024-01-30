@@ -1,0 +1,192 @@
+/* Styles for screens with a maximum width of 600px */
+@media (max-width: 600px) {
+    body {
+        font-size: 15px;
+        background-color: aqua;
+    }
+}
+
+header {
+    background-color: hotpink;
+    height: fit-content;
+    font-family: fantasy;
+    border: 1px;
+    color: white border 2px solid;
+    padding: 10px;
+    max-width: 600px;
+    text-align: left;
+}
+
+footer {
+    background-color: violet;
+    font-size: 20px;
+    font-family: fantasy;
+    justify-items: center;
+    text-align: center;
+    max-width: 600px;
+}
+
+body {
+    background-color: lightpink
+        /* max-width: 600px; */
+}
+
+label {
+    border: 1px solid white;
+    background-color: pink;
+    font-size: 25px;
+    padding: 8px;
+    border-radius: 12px;
+    color: darkorchid;
+    font-family: fantasy;
+    width: 100px;
+    height: fit-content;
+    font-weight: bold;
+    text-decoration: wavy;
+}
+
+.form1 {
+    background-color: hotpink;
+    text-align: left;
+    max-width: 450px;
+    padding: 5px;
+
+}
+
+input {
+    border-radius: 20px;
+    background-color: pink;
+    width: 400px;
+    height: 50px;
+    font-family: fantasy;
+    border: 2px solid white;
+
+}
+
+a {
+    border: 2px solid white;
+    background-color: pink;
+    font-size: 25px;
+    padding: 8px;
+    border-radius: 12px;
+    color: darkorchid;
+    justify-items: left;
+    font-weight: bolder;
+    font-family: fantasy;
+}
+
+hr {
+    background-color: darkkhaki;
+    border: 2px;
+}
+
+.button {
+    background-color: rgb(206, 158, 222);
+    font-size: 28px;
+    font-family: fantasy;
+    height: fit-content;
+    width: 150px;
+    padding: 5px;
+    border-radius: 12px;
+}
+
+.button1 {
+    background-color: rgb(219, 159, 167);
+    font-size: 28px;
+    font-family: fantasy;
+    height: fit-content;
+    width: 150px;
+    padding: 5px;
+}
+
+h1 {
+    font-family: fantasy;
+    color: darkorchid;
+    background-size: auto;
+    width: fit-content;
+    font-style: italic;
+    font-size: 30px;
+    text-align: left;
+    font-weight: bold;
+}
+
+h2 {
+    color: darkslateblue;
+}
+
+textarea {
+    background-color: pink;
+    border-radius: 20px;
+    width: 400px;
+    border: 2px solid white;
+}
+
+table {
+    font-size: larger;
+    background-color: hotpink;
+    max-width: 600px;
+    padding: 10px;
+}
+
+td,
+tr {
+    border: 1px solid darkorchid;
+    padding: 5px;
+    width: fit-content;
+    text-align: center;
+    color: black;
+    font-family: fantasy;
+    font-weight: bold;
+    font-size: x-large;
+    height: fit-content;
+    background-color: hotpink;
+}
+
+tr {
+    border-right: 1px darkorchid;
+}
+
+
+.button3 {
+    font-size: larger;
+    font-family: fantasy;
+    background-color: burlywood;
+    width: 150px;
+    font-style: oblique;
+}
+
+.logout {
+    font-size: 25px;
+    font-family: fantasy;
+    color: blueviolet;
+    margin-left: 50px;
+}
+
+.register {
+    border: 3px solid darkorange;
+    padding: 10px;
+    background-color: pink;
+}
+
+.indexmenu {
+    padding: 25px;
+}
+
+.loginform {
+    border: 3px solid darkorange;
+    padding: 10px;
+    background-color: pink;
+}
+
+.menu2 {
+    margin-left: 30px;
+}
+
+.usernamedisplay {
+
+    font-size: 30px;
+    font-family: fantasy;
+    color: azure;
+    width: fit-content;
+    padding: 5px;
+}

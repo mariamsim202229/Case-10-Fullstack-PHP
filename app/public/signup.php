@@ -15,7 +15,7 @@
 
             // fråga databasen om användarnamnet är upptaget
             // Vi behöver alltså skriva en sql query
-            $stmt = $pdo->prepare("SELECT (username) FROM Users WHERE username = :username");
+            $stmt = $pdo->prepare("SELECT (username) FROM user WHERE username = :username");
             $stmt->bindParam(":username", $username);
             $stmt->execute();
 
@@ -24,7 +24,7 @@
             // Namnet är ledigt
             if ($row == false) {
                 // Lägga in användaren till databasen
-                $stmt = $pdo->prepare("INSERT INTO Users (username, password) VALUES (:username, :password)");
+                $stmt = $pdo->prepare("INSERT INTO user (username, password) VALUES (:username, :password)");
                 $stmt->bindParam(":username", $username);
                 $stmt->bindParam(":password", $password);
                 $stmt->execute();
