@@ -7,7 +7,7 @@
 }
 
 header {
-    background-color: hotpink;
+    /* background-color: hotpink; */
     height: fit-content;
     font-family: fantasy;
     border: 1px;
@@ -99,7 +99,7 @@ hr {
     padding: 5px;
 }
 
-h1 {
+h1, h2, h3, h4, h5 {
     font-family: fantasy;
     color: darkorchid;
     background-size: auto;
@@ -110,9 +110,6 @@ h1 {
     font-weight: bold;
 }
 
-h2 {
-    color: darkslateblue;
-}
 
 textarea {
     background-color: pink;
@@ -124,7 +121,7 @@ textarea {
 table {
     font-size: larger;
     background-color: hotpink;
-    max-width: 600px;
+    width: 600px;
     padding: 10px;
 }
 

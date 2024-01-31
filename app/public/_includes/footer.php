@@ -1,6 +1,9 @@
 <hr>
 <footer>
-    
-    <?= render_copyright() ?>
+
+
+    Mariam Simonyan
+    <hr>
+    Github: mariam202229
 
 </footer>

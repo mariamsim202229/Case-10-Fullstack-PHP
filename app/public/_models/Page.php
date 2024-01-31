@@ -45,19 +45,36 @@ class Page extends Database
 
         return $stmt->fetchAll();
     }
-    public function add_one($form_title, $form_content, $date_created, $form_user_id )
+
+    public function getPageById($id)
     {
-       $date_created = date('Y-m-d H:i:s');
+        $stmt = $this->db->prepare("SELECT * FROM `page` WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+
+        $stmt->execute();
+        return $stmt->fetch();
+
+    }
+
+    public function add_one($form_title, $form_content, $date_created, $form_user_id)
+    {
+        $date_created = date('Y-m-d H:i:s');
         $stmt = $this->db->prepare("INSERT INTO page (title, content, date_created, user_id) VALUES (?, ?, ?, ? )");
         $stmt->execute([$form_title, $form_content, $date_created, $form_user_id]);
         // MySQL returns an id - last insterted Id...
         return $this->db->lastInsertId();
     }
 
-    public function edit_page ($title, $content, $date_created, $user_id) {
 
-        $stmt = $this->db->prepare("UPDATE `page` SET `title`= :title,`content`= :content,`date_created`= :date_created,`user_id`= :user_id WHERE `id` = :id");
-        $stmt->execute([$title, $content, $date_created, $user_id]);
+    public function edit_page($form_title, $form_content, $form_user_id)
+    {
+        $stmt = $this->db->prepare("UPDATE `page` SET `title`= :title,`content`= :content,`user_id`= :user_id WHERE `id` = :id");
+        $stmt->bindParam(":title", $form_title, PDO::PARAM_STR);
+        $stmt->bindParam(":content", $form_content, PDO::PARAM_STR);
+        $stmt->bindParam(":user_id",  $form_user_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $this->db->lastInsertId();
     }
 
     public function delete_one($id)

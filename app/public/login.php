@@ -1,26 +1,31 @@
-<?php 
+<?php
 
-    // se till att sessioner används på sidan
-    session_start();
-        
-    include_once "_includes/database-connection.php";
-    include_once "_includes/global-functions.php";
-    include_once "_models/User.php";
+// se till att sessioner används på sidan
+session_start();
 
-    
-    setup_user($pdo);
+include_once "_includes/database-connection.php";
+include_once "_includes/global-functions.php";
+include_once "_models/User.php";
+
+
+setup_user($pdo);
 ?>
 
 <html lang="en">
+
 <head>
-<link rel="stylesheet" type="css" href="styles.css">
+    <link rel="stylesheet" type="css" href="styles.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
+
 <body>
 
+    <style>
+        <?php include 'styles/styles.css'; ?>
+    </style>
     <?php
 
     include "_includes/header.php";
@@ -36,8 +41,8 @@
         <button type="submit">Login</button>
     </form>
 
-    <?php 
-     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // get user data from form
         $form_username = $_POST['username'];
         $form_password = $_POST['password'];
@@ -47,9 +52,8 @@
 
         try {
             $result = $pdo->query($sql_statement);
-            
             $user = $result->fetch();
-            
+
             // no user found with these credentials
             if (!$user) {
                 header("location: login.php");
@@ -72,10 +76,10 @@
             // redirect to start page
             header("location: index.php");
         } catch (PDOException $err) {
-            echo "There was a problem: " . $err->getMessage(); 
+            echo "There was a problem: " . $err->getMessage();
         }
 
-     }
+    }
 
     ?>
 
@@ -83,4 +87,5 @@
     include "_includes/footer.php";
     ?>
 </body>
+
 </html>

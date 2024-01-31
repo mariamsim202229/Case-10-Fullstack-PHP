@@ -29,11 +29,15 @@ $pageModel = new Page();
     <?php
     include "_includes/header.php";
     // include "pages.php"
-        ?>
+    ?>
 
     <?php
     include "_includes/error-message.php";
     ?>
+
+    <style>
+        <?php include 'styles/styles.css'; ?>
+    </style>
 
     <?php
     $isLoggedIn = isset($_SESSION["username"]);
@@ -41,9 +45,9 @@ $pageModel = new Page();
 
         echo "<h2>Your files</h2>";
         // $pages = $pageModel->getAllPages();
-
+    
         // var_dump($pages);
-
+    
         // Kontrollera om användare är inloggad
         include "_includes/upload-form.php";
     } else {

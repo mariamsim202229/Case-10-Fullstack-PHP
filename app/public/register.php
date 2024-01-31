@@ -14,6 +14,7 @@ setup_user($pdo);
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" type="css" href="styles.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +23,9 @@ setup_user($pdo);
 
 <body>
 
+    <style>
+        <?php include 'styles/styles.css'; ?>
+    </style>
     <?php
     include "_includes/header.php";
     ?>

@@ -13,8 +13,9 @@ $page = new Page();
 $user = new User();
 
 $user_id = $_SESSION['user_id'];
+$id = isset($_GET['id']) ? $_GET['id'] : null;
+$form_title = isset($_GET['title']) ? $_GET['title'] : null;
 
-$rows = $page->getAllPages();
 // Förbereder variabler som kommer att användas i formuläret
 
 // insert new page
@@ -37,24 +38,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (PDOException $err) {
         echo "There was a problem: " . $err->getMessage();
     }
+
+    $pageEdit = $page->edit_page($form_title, $form_content, $form_user_id);
+    echo "function edit_page return: $pageEdit";
+    // Kontrollera om uppdateringen lyckades
+    if ($pageEdit) {
+        header('Location: pages.php?action=update');
+        exit;
+    }
+    print_r2($pageEdit);
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    $link = "pages.php?id=:id";
+    $rowPage = $page->getPageById($id);
+    print_r2($rowPage);
+    $rows = $page->getAllPages();
+}
+
+
+echo "<a href= \"$link\"  target=\"_blank\">$form_title</a><br>";
 
 // delete from db
 // $result = $language->delete_one(10);
 // echo "function delete_one return: $result";
 
-print_r2($rows);
+// print_r2($rows);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" type="css" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEW PAGE</title>
 </head>
 
 <body>
+
+    <style>
+        <?php include 'styles/styles.css'; ?>
+    </style>
     <?php
 
     // Skapa en tabell för att visa/redigera resultatet
@@ -63,7 +89,7 @@ print_r2($rows);
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" class="form1">
 
             <p>
-                <hr>
+
                 <label for="title"> <b> PAGE TITLE </b></label>
                 <hr>
                 <input type="text" name="title" id="title" required minlength="2" maxlength="25">
@@ -71,8 +97,6 @@ print_r2($rows);
                 <label for="content"><b> CONTENT </b></label>
                 <hr>
                 <textarea name="content" id="content" cols="30" rows="10" required minlength="2" maxlength="50"></textarea>
-                <hr>
-                <label for="date_created"><b> Date created </b></label>
                 <hr>
                 <!-- för att koppla en användare till tabellen används ett dolt fält med användarens id -->
                 <input type="hidden" name="id" id="id">
@@ -84,9 +108,40 @@ print_r2($rows);
                 <input type="reset" value="Nollställ" class="button1">
             </p>
         </form>
-        <?php
+
+        <aside>
+            <h2>Menu</h2>
+            <nav>
+                <ul>
+                    <?php
+                    if (!empty($rows)) {
+                        foreach ($rows as $row) {
+                            $id = $row["id"];
+                            $form_title = $row["title"];
+                            echo "<li><a href='pages.php?id=$id'>$form_title</a></li>";
+                            // Kontrollera om arrayen inte är tom
+                            echo '<div>';
+                            echo '<h3>Content</h3>';
+                            echo '<p>' . $row['content'] . '</p>';
+                            echo '<h4>Date created</h4>';
+                            echo '<p>' . $row['date_created'] . '</p>';
+                            echo '<h5>Username</h5>';
+                            echo '<p>' . $row['username'] . '</p>';
+                            echo '</tr>';
+                        }
+                        echo '</div>';
+                    } else {
+                        echo 'No pages found.';
+                    }
+    } else {
+        echo "0 results";
     }
+
     ?>
+            </ul>
+        </nav>
+    </aside>
+
 
 </body>
 

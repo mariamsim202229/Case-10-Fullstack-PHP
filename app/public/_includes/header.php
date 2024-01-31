@@ -1,5 +1,5 @@
 <header>
-    Ett sidhuvud...
+  
 
     <?= isset($_SESSION['username']) ? $_SESSION['username'] : ""; ?>
     <?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "" ; ?>
