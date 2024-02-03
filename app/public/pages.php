@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $id = isset($_GET['id']) ? $_GET['id'] : null;
     $link = "pages.php?id=:id";
     $rowPage = $page->getPageById($id);
-    print_r2($rowPage);
+    // print_r2($rowPage);
     $rows = $page->getAllPages();
 }
 
@@ -81,66 +81,82 @@ echo "<a href= \"$link\"  target=\"_blank\">$form_title</a><br>";
     <style>
         <?php include 'styles/styles.css'; ?>
     </style>
-    <?php
 
-    // Skapa en tabell för att visa/redigera resultatet
-    if (isset($_SESSION['user_id'])) {
-        ?>
-        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" class="form1">
 
-            <p>
 
-                <label for="title"> <b> PAGE TITLE </b></label>
-                <hr>
-                <input type="text" name="title" id="title" required minlength="2" maxlength="25">
-                <hr>
-                <label for="content"><b> CONTENT </b></label>
-                <hr>
-                <textarea name="content" id="content" cols="30" rows="10" required minlength="2" maxlength="50"></textarea>
-                <hr>
-                <!-- för att koppla en användare till tabellen används ett dolt fält med användarens id -->
-                <input type="hidden" name="id" id="id">
-                <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
-            </p>
-            <p>
-                <input type="submit" value="Spara" class="button">
-                <br>
-                <input type="reset" value="Nollställ" class="button1">
-            </p>
-        </form>
+    <aside class="asideBar">
+        <h2>Publicerade sidor</h2>
+        <hr>
+        <hr>
+        <br>
+        <nav>
+            <ul>
+                <?php
+                // Kontrollera om arrayen inte är tom
+                if (!empty($rows)) {
+                    foreach ($rows as $row) {
+                        $id = $row["id"];
+                        $form_title = $row["title"];
 
-        <aside>
-            <h2>Menu</h2>
-            <nav>
-                <ul>
-                    <?php
-                    if (!empty($rows)) {
-                        foreach ($rows as $row) {
-                            $id = $row["id"];
-                            $form_title = $row["title"];
-                            echo "<li><a href='pages.php?id=$id'>$form_title</a></li>";
-                            // Kontrollera om arrayen inte är tom
+                        echo "<li><a href='pages.php?id=$id'>$form_title</a></li>";
+
+                        if ($rowPage && isset($_GET['id']) && $_GET['id'] == $id) {
                             echo '<div>';
-                            echo '<h3>Content</h3>';
+                            echo '<h3>Text</h3>';
                             echo '<p>' . $row['content'] . '</p>';
-                            echo '<h4>Date created</h4>';
-                            echo '<p>' . $row['date_created'] . '</p>';
-                            echo '<h5>Username</h5>';
-                            echo '<p>' . $row['username'] . '</p>';
-                            echo '</tr>';
-                        }
-                        echo '</div>';
-                    } else {
-                        echo 'No pages found.';
-                    }
-    } else {
-        echo "0 results";
-    }
+                            echo '<h4>Publicerad</h4>';
+                            echo $row['date_created'];
+                            echo '<h5>författare</h5>';
+                            echo  $row['username'] ;
+                            // echo '</div>';
 
-    ?>
+                        }
+                    }
+                    echo '</div>';
+                    // }
+                    //  else {
+                    //     echo 'No pages found.';
+                    // }
+// } else {
+//     echo "0 results";
+                }
+
+                // ?>
             </ul>
         </nav>
     </aside>
+
+
+    <?php
+
+    // Skapa en tabell för att visa/redigera resultatet
+    if (isset($_SESSION['user_id']))
+    ?>
+    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" class="form1">
+
+
+        <p>
+
+            <label for="title"> <b> PAGE TITLE </b></label>
+            <hr>
+            <input type="text" name="title" id="title" required minlength="2" maxlength="25">
+            <hr>
+            <label for="content"><b> CONTENT </b></label>
+            <hr>
+            <textarea name="content" id="content" cols="30" rows="10" required minlength="2" maxlength="255"></textarea>
+            <hr>
+            <!-- för att koppla en användare till tabellen används ett dolt fält med användarens id -->
+            <input type="hidden" name="id" id="id">
+            <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
+        </p>
+        <p>
+            <input type="submit" value="Spara" class="button">
+            <br>
+            <input type="reset" value="Nollställ" class="button1">
+        </p>
+    </form>
+
+
 
 
 </body>

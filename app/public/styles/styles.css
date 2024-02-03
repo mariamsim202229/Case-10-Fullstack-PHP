@@ -1,5 +1,5 @@
 /* Styles for screens with a maximum width of 600px */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     body {
         font-size: 15px;
         background-color: aqua;
@@ -13,7 +13,7 @@ header {
     border: 1px;
     color: white border 2px solid;
     padding: 10px;
-    max-width: 600px;
+    width: 900px;
     text-align: left;
 }
 
@@ -50,7 +50,6 @@ label {
     text-align: left;
     max-width: 450px;
     padding: 5px;
-
 }
 
 input {
@@ -60,7 +59,6 @@ input {
     height: 50px;
     font-family: fantasy;
     border: 2px solid white;
-
 }
 
 a {
@@ -105,9 +103,10 @@ h1, h2, h3, h4, h5 {
     background-size: auto;
     width: fit-content;
     font-style: italic;
-    font-size: 30px;
+    font-size: 20px;
     text-align: left;
     font-weight: bold;
+    text-decoration: underline;
 }
 
 
@@ -118,14 +117,14 @@ textarea {
     border: 2px solid white;
 }
 
-table {
+/* table {
     font-size: larger;
     background-color: hotpink;
     width: 600px;
     padding: 10px;
-}
+} */
 
-td,
+/* td,
 tr {
     border: 1px solid darkorchid;
     padding: 5px;
@@ -141,7 +140,7 @@ tr {
 
 tr {
     border-right: 1px darkorchid;
-}
+} */
 
 
 .button3 {
@@ -186,4 +185,18 @@ tr {
     color: azure;
     width: fit-content;
     padding: 5px;
+}
+
+.asideBar {
+    display: flex;
+    width: min-content;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: darkgoldenrod;
+    font-size: 30px;
+}
+
+ul,li {
+    padding: 10px;
 }
