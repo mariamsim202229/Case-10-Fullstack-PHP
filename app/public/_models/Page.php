@@ -2,10 +2,7 @@
 // inkludera föräldern så att man kan ärva
 include_once "_models/Database.php";
 
-// vi vill göra en klass som ärver från Database.php för att följer Anders kodkonverstion
-// File Model ska ansvara för att allt som har göra med tabellen 'files'
-// T.ex Create, Read, Update, Delete av filer
-// 1. Börja med att göra en tom class 'File' som ärver från Database
+// 1. Börja med att göra en tom class 'Page' som ärver från Database
 class Page extends Database
 {
 
@@ -42,7 +39,6 @@ class Page extends Database
     {
         $stmt = $this->db->prepare("SELECT page.*, user.username FROM page INNER JOIN user ON page.user_id = user.id");
         $stmt->execute();
-
         return $stmt->fetchAll();
     }
 
@@ -50,10 +46,8 @@ class Page extends Database
     {
         $stmt = $this->db->prepare("SELECT * FROM `page` WHERE id = :id");
         $stmt->bindParam(':id', $id);
-
         $stmt->execute();
         return $stmt->fetch();
-
     }
 
     public function add_one($form_title, $form_content, $date_created, $form_user_id)
@@ -64,8 +58,6 @@ class Page extends Database
         // MySQL returns an id - last insterted Id...
         return $this->db->lastInsertId();
     }
-
-
     public function edit_page($form_title, $form_content, $form_user_id)
     {
         $stmt = $this->db->prepare("UPDATE `page` SET `title`= :title,`content`= :content,`user_id`= :user_id WHERE `id` = :id");
@@ -79,7 +71,6 @@ class Page extends Database
 
     public function delete_one($id)
     {
-        // use placeholder ?
         $sql = "DELETE FROM `page` WHERE id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
@@ -88,4 +79,3 @@ class Page extends Database
         return $stmt->rowCount();
     }
 }
-?>

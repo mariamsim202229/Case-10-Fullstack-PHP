@@ -26,11 +26,7 @@ setup_user($pdo);
     <style>
         <?php include 'styles/styles.css'; ?>
     </style>
-    <?php
-
-    include "_includes/header.php";
-
-    ?>
+    <?php include "_includes/header.php"; ?>
 
     <h1>Login</h1>
     <form action="" method="post">
@@ -50,7 +46,7 @@ setup_user($pdo);
         // send to database
         $sql_statement = "SELECT * FROM `user` WHERE `username` = '$form_username'";
 
-        try {
+        // try {
             $result = $pdo->query($sql_statement);
             $user = $result->fetch();
 
@@ -66,18 +62,16 @@ setup_user($pdo);
                 exit();
             }
 
-
             // när rätt lösenord är angivet är användaren känd
             // skapa sessionsvariabler som kan användas 
             $_SESSION['username'] = $user['username'];
             $_SESSION['user_id'] = $user['id'];
 
-
             // redirect to start page
-            header("location: index.php");
-        } catch (PDOException $err) {
-            echo "There was a problem: " . $err->getMessage();
-        }
+            // header("location: index.php");
+        // } catch (PDOException $err) {
+        //     echo "There was a problem: " . $err->getMessage();
+        // }
 
     }
 

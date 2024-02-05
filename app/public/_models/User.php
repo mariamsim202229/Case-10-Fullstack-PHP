@@ -2,10 +2,6 @@
     // inkludera föräldern så att man kan ärva
     include_once "_models/Database.php";
 
-    // vi vill göra en klass som ärver från Database.php för att följer Anders kodkonverstion
-    // File Model ska ansvara för att allt som har göra med tabellen 'users'
-    // T.ex Create, Read, Update, Delete av Users
-
     // 1. Börja med att göra en tom class 'User' som ärver från Database
     class User extends Database {
 
@@ -40,7 +36,6 @@
             $stmt = $this->db->prepare("INSERT INTO `users` (`username`, `password`) VALUES (?, ?)");
 
             $stmt->execute([$username, $hashed_password]);
-
             return $this->db->lastInsertId();
         }
 

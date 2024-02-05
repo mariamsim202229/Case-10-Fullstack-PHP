@@ -47,7 +47,6 @@ setup_user($pdo);
         $form_username = $_POST['username'];
         $form_hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-
         // send to database
         $sql_statement = "INSERT INTO `user` (`username`, `password`) VALUES ('$form_username', '$form_hashed_password')";
 

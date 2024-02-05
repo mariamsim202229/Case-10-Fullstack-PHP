@@ -16,8 +16,12 @@ session_destroy();
     <title>Logga ut</title>
 </head>
 <body>
+
+<style>
+        <?php include 'styles/styles.css'; ?>
+    </style>
     
-    Du är nu utloggad - tillbaka till <a href="login.php">att kunna logga in</a>;
+    Du är nu utloggad - tillbaka till <a href="login.php">Login</a>;
 
 </body>
 </html>

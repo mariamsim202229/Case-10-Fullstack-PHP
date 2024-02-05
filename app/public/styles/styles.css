@@ -78,12 +78,12 @@ hr {
     border: 2px;
 }
 
-.button {
+.button, button {
     background-color: rgb(206, 158, 222);
-    font-size: 28px;
+    font-size: 20px;
     font-family: fantasy;
     height: fit-content;
-    width: 150px;
+    width: 300px;
     padding: 5px;
     border-radius: 12px;
 }
@@ -103,10 +103,11 @@ h1, h2, h3, h4, h5 {
     background-size: auto;
     width: fit-content;
     font-style: italic;
-    font-size: 20px;
+    font-size: 30px;
     text-align: left;
     font-weight: bold;
     text-decoration: underline;
+    margin-left: 200px;
 }
 
 
@@ -188,15 +189,26 @@ tr {
 }
 
 .asideBar {
-    display: flex;
-    width: min-content;
+    /* display: flex; */
+    width: 600px;
     background-size: cover;
     background-position: center;
     text-align: center;
     color: darkgoldenrod;
-    font-size: 30px;
+    font-size: 20px;
+    display: flex;
 }
 
 ul,li {
     padding: 10px;
 }
+
+.contentDiv {
+    width: 600px;
+}
+
+/* .aside {
+    display: flex;
+    flex-direction: column;
+    border: solid 3px green;
+} */

@@ -28,7 +28,6 @@ $pageModel = new Page();
 
     <?php
     include "_includes/header.php";
-    // include "pages.php"
     ?>
 
     <?php
@@ -41,22 +40,7 @@ $pageModel = new Page();
 
     <?php
     $isLoggedIn = isset($_SESSION["username"]);
-    if ($isLoggedIn) {
 
-        echo "<h2>Your files</h2>";
-        // $pages = $pageModel->getAllPages();
-    
-        // var_dump($pages);
-    
-        // Kontrollera om användare är inloggad
-        include "_includes/upload-form.php";
-    } else {
-        // om inte, skriv ut ett annat meddelande
-        echo "<p>You need to login in order to upload files</p>";
-    }
-    ?>
-
-    <?php
     include "_includes/footer.php";
     ?>
 </body>
