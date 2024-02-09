@@ -33,7 +33,7 @@
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             
             // add to database
-            $stmt = $this->db->prepare("INSERT INTO `users` (`username`, `password`) VALUES (?, ?)");
+            $stmt = $this->db->prepare("INSERT INTO `user` (`username`, `password`) VALUES (?, ?)");
 
             $stmt->execute([$username, $hashed_password]);
             return $this->db->lastInsertId();
@@ -41,7 +41,7 @@
 
         public function authenticate($username, $password) {
             // send to database
-            $stmt = "SELECT * FROM `users` WHERE `username` = '$username' ";
+            $stmt = "SELECT * FROM `user` WHERE `username` = '$username' ";
             $result = $this->db->query($stmt);
             
             $user = $result->fetch();

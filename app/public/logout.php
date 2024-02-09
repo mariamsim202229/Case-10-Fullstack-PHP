@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+include "_includes/header.php";
 // logga ut användare genom att använda session destroy
 session_destroy();
 

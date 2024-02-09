@@ -1,8 +1,8 @@
 /* Styles for screens with a maximum width of 600px */
-@media (max-width: 900px) {
+@media (max-width: 680px) {
     body {
         font-size: 15px;
-        background-color: aqua;
+        background-color: rgb(19, 127, 127);
     }
 }
 
@@ -10,15 +10,14 @@ header {
     /* background-color: hotpink; */
     height: fit-content;
     font-family: fantasy;
-    border: 1px;
+    /* border: 1px; */
     color: white border 2px solid;
     padding: 10px;
-    width: 900px;
     text-align: left;
 }
 
 footer {
-    background-color: violet;
+    background-color: white;
     font-size: 20px;
     font-family: fantasy;
     justify-items: center;
@@ -26,18 +25,13 @@ footer {
     max-width: 600px;
 }
 
-body {
-    background-color: lightpink
-        /* max-width: 600px; */
-}
-
 label {
     border: 1px solid white;
-    background-color: pink;
+    background-color: rgb(144, 181, 181);
     font-size: 25px;
     padding: 8px;
     border-radius: 12px;
-    color: darkorchid;
+    color: black;
     font-family: fantasy;
     width: 100px;
     height: fit-content;
@@ -46,15 +40,19 @@ label {
 }
 
 .form1 {
-    background-color: hotpink;
-    text-align: left;
+    background-color: rgb(210, 169, 88);
     max-width: 450px;
-    padding: 5px;
+    padding: 10px;
+    text-align: center;
+    margin-left: 20px;
+    font-size: 30px;
+    border: 2px solid white;
+    border-radius: 12px;
 }
 
 input {
     border-radius: 20px;
-    background-color: pink;
+    background-color: rgb(201, 206, 206);
     width: 400px;
     height: 50px;
     font-family: fantasy;
@@ -63,14 +61,14 @@ input {
 
 a {
     border: 2px solid white;
-    background-color: pink;
-    font-size: 25px;
+    font-size: 20px;
     padding: 8px;
     border-radius: 12px;
-    color: darkorchid;
+    color: rgb(175, 14, 35);
     justify-items: left;
     font-weight: bolder;
     font-family: fantasy;
+    background-color: beige;
 }
 
 hr {
@@ -78,28 +76,47 @@ hr {
     border: 2px;
 }
 
-.button, button {
-    background-color: rgb(206, 158, 222);
-    font-size: 20px;
+.button,
+button {
+    background-color: rgb(11, 180, 113);
+    font-size: 24px;
     font-family: fantasy;
-    height: fit-content;
-    width: 300px;
+    height: max-content;
+    width: 150px;
     padding: 5px;
     border-radius: 12px;
+    color: aliceblue;
 }
 
 .button1 {
-    background-color: rgb(219, 159, 167);
-    font-size: 28px;
+    background-color: rgb(175, 14, 35);
+    font-size: 18px;
     font-family: fantasy;
-    height: fit-content;
-    width: 150px;
+    height: max-content;
+    width: fit-content;
     padding: 5px;
+    border-radius: 12px;
+    color: aliceblue;
 }
 
-h1, h2, h3, h4, h5 {
+.button2 {
+    background-color: rgb(200, 200, 48);
+    font-size: 24px;
     font-family: fantasy;
-    color: darkorchid;
+    height: max-content;
+    width: 150px;
+    padding: 5px;
+    border-radius: 12px;
+    color: aliceblue;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: fantasy;
+    color: rgb(222, 136, 23);
     background-size: auto;
     width: fit-content;
     font-style: italic;
@@ -107,42 +124,17 @@ h1, h2, h3, h4, h5 {
     text-align: left;
     font-weight: bold;
     text-decoration: underline;
-    margin-left: 200px;
+    margin-left: 120px;
 }
 
 
 textarea {
-    background-color: pink;
+    background-color: rgb(201, 206, 206);
     border-radius: 20px;
     width: 400px;
     border: 2px solid white;
-}
-
-/* table {
-    font-size: larger;
-    background-color: hotpink;
-    width: 600px;
-    padding: 10px;
-} */
-
-/* td,
-tr {
-    border: 1px solid darkorchid;
-    padding: 5px;
-    width: fit-content;
-    text-align: center;
-    color: black;
     font-family: fantasy;
-    font-weight: bold;
-    font-size: x-large;
-    height: fit-content;
-    background-color: hotpink;
 }
-
-tr {
-    border-right: 1px darkorchid;
-} */
-
 
 .button3 {
     font-size: larger;
@@ -199,16 +191,34 @@ tr {
     display: flex;
 }
 
-ul,li {
+ul,
+li {
     padding: 10px;
 }
 
 .contentDiv {
-    width: 600px;
+   background-color: white;
+   width: fit-content;
+   height: fit-content;
+   padding: 15px
+};
+
+::placeholder {
+    font-size: 30px;
+    text-align: center;
+    color: rgb(175, 14, 35);
 }
 
-/* .aside {
+
+.headerDiv {
     display: flex;
-    flex-direction: column;
-    border: solid 3px green;
-} */
+    border: 1px solid white;
+    border-radius: 28px;
+    width: fit-content;
+    height: 300px;
+    background-color: rgb(210, 169, 88);
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+    margin-left: 150px;
+}

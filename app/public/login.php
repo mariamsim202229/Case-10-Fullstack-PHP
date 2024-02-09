@@ -47,32 +47,34 @@ setup_user($pdo);
         $sql_statement = "SELECT * FROM `user` WHERE `username` = '$form_username'";
 
         // try {
-            $result = $pdo->query($sql_statement);
-            $user = $result->fetch();
+        $result = $pdo->query($sql_statement);
+        $user = $result->fetch();
 
-            // no user found with these credentials
-            if (!$user) {
-                header("location: login.php");
-                exit();
-            }
+        // no user found with these credentials
+        if (!$user) {
+            header("location: login.php");
+            exit();
+        }
 
-            $is_correct_password = password_verify($form_password, $user['password']);
-            if (!$is_correct_password) {
-                header("location: login.php");
-                exit();
-            }
+        $is_correct_password = password_verify($form_password, $user['password']);
+        if ($is_correct_password) {
+            header("location: pages.php");
+        } else {
+            header("location: pages.php");
+            exit();
+        }
 
-            // när rätt lösenord är angivet är användaren känd
-            // skapa sessionsvariabler som kan användas 
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['user_id'] = $user['id'];
+        // när rätt lösenord är angivet är användaren känd
+        // skapa sessionsvariabler som kan användas 
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['user_id'] = $user['id'];
 
-            // redirect to start page
-            // header("location: index.php");
+        // redirect to start page
+        // header("location: index.php");
         // } catch (PDOException $err) {
         //     echo "There was a problem: " . $err->getMessage();
         // }
-
+    
     }
 
     ?>

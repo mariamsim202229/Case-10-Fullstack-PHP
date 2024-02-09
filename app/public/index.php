@@ -2,7 +2,7 @@
 
 session_start();
 
-$title = "About PHP";
+$title = "En applikation för att publicera sidor";
 
 include_once "_includes/database-connection.php";
 include_once "_includes/global-functions.php";
@@ -33,7 +33,10 @@ $pageModel = new Page();
     <?php
     include "_includes/error-message.php";
     ?>
-
+   <main>
+            <h1><?php echo $title; ?></h1>
+            <div><?php echo $content ?></div>
+        </main>
     <style>
         <?php include 'styles/styles.css'; ?>
     </style>

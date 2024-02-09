@@ -32,18 +32,22 @@ class Image extends Database
 
     public function getImagesByPageId($page_id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM image INNER JOIN page ON image.page_id = page.id  WHERE image.page_id = :page_id ");
+        $stmt = $this->db->prepare("SELECT * FROM image INNER JOIN page ON image.page_id = page.id  WHERE page_id = :page_id ");
         // $stmt->bindParam(':url', $url, PDO::PARAM_STR);
         $stmt->bindParam(':page_id', $page_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    public function add_image($url, $page_id)
+    public function add_image($url)
     {
-        $stmt = $this->db->prepare("INSERT INTO image ( url, page_id) VALUES ( :url, :page_id)");
+        $stmt = $this->db->prepare("INSERT INTO image ( url) VALUES ( :url)");
         $stmt->bindParam(':url', $url);
-        $stmt->bindParam(':page_id', $page_id, PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt->bindParam(':page_id', PDO::PARAM_INT);
+        $stmt->execute([$url]);
+
+        // Set values for parameters
+        // $url = 'some_value';
+        // $page_id = 'some_other_value';
         // MySQL returns an id - last insterted Id...
         return $this->db->lastInsertId();
     }

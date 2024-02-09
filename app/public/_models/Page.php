@@ -5,7 +5,6 @@ include_once "_models/Database.php";
 // 1. Börja med att göra en tom class 'Page' som ärver från Database
 class Page extends Database
 {
-
     function __construct()
     {
         // 1. få kontakt med databasen i vår docker-compose
@@ -50,31 +49,30 @@ class Page extends Database
         return $stmt->fetch();
     }
 
-    public function add_one($form_title, $form_content, $date_created, $form_user_id)
+    public function add_one($title, $content, $user_id)
     {
-        $date_created = date('Y-m-d H:i:s');
-        $stmt = $this->db->prepare("INSERT INTO page (title, content, date_created, user_id) VALUES (?, ?, ?, ? )");
-        $stmt->execute([$form_title, $form_content, $date_created, $form_user_id]);
+        // $date_created = date('Y-m-d H:i:s');
+        $stmt = $this->db->prepare("INSERT INTO page (title, content, user_id) VALUES (?, ?, ?)");
+        $stmt->execute([$title, $content, $user_id]);
         // MySQL returns an id - last insterted Id...
         return $this->db->lastInsertId();
     }
-    public function edit_page($form_title, $form_content, $form_user_id)
+    public function edit_page($title, $content)
     {
-        $stmt = $this->db->prepare("UPDATE `page` SET `title`= :title,`content`= :content,`user_id`= :user_id WHERE `id` = :id");
-        $stmt->bindParam(":title", $form_title, PDO::PARAM_STR);
-        $stmt->bindParam(":content", $form_content, PDO::PARAM_STR);
-        $stmt->bindParam(":user_id",  $form_user_id, PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt = $this->db->prepare("UPDATE `page` SET `title`= :title,`content`= :content WHERE id = :id");
 
-        return $this->db->lastInsertId();
+        $stmt->bindParam(":title", $title, PDO::PARAM_STR);
+        $stmt->bindParam(":content", $content, PDO::PARAM_STR);
+        return $stmt->rowCount();
+    //    return $stmt->execute();
+        // return $this->db->lastInsertId();
     }
 
     public function delete_one($id)
     {
-        $sql = "DELETE FROM `page` WHERE id = :id";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id]);
-
+        $stmt = $this->db->prepare("DELETE FROM `page` WHERE id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
         // return number of affected rows
         return $stmt->rowCount();
     }
