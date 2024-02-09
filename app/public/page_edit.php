@@ -15,35 +15,60 @@ $page = new Page();
 $user = new User();
 $imageModel = new Image();
 
+$id = 0;
 $title = "";
 $content = "";
-$user_id = "";
+$user_id = $_SESSION['user_id'];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
-    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-    if (isset($_POST['delete'])) {
-        $pageDelete = $page->delete_one($id);
-        header('Location: page.php');
-    }
-}
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST"  ) {
-        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        $title = isset($_GET['title']) ? $_GET['title'] : '';
-        $content = isset($_GET['content']) ? $_GET['content'] : '';
-    
-        $user_id = $_SESSION['user_id'];
-        $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-        $title = isset($_POST['title']) ? trim($_POST['title']) : "";
-        $content = isset($_POST['content']) ? trim($_POST['content']) : "";
-
+if (isset($_SESSION['user_id'])) {
     if (isset($_POST['update'])) {
-        $pageUpdate = $page->edit_page($title, $content);
-        header('Location: page.php?id= ' . $id . '');
+        var_dump($_POST);
+        // $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+        // $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+        // $title = isset($_POST['title']) ? trim($_POST['title']) : "";
+        // $content = isset($_POST['content']) ? trim($_POST['content']) : "";
+        // Retrieve data for the specific page
+
+        $row = $page->getPageById($id);
+        if ($row) {
+            $title = isset($_GET['title']) ? trim($_GET['title']) : "";
+            $content = isset($_GET['content']) ? trim($_GET['content']) : "";
+            $title = $row['title'];
+            $content = $row['content'];
+            // $date_created = $row['date_created'];
+            print_r2($row);
+
+
+            // $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+          
+                $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+                $title = isset($_POST['title']) ? trim($_POST['title']) : "";
+                $content = isset($_POST['content']) ? trim($_POST['content']) : "";
+
+                $pageUpdate = $page->edit_page($id, $title, $content);
+
+                print_r2($pageUpdate);
+                // Kontrollera om uppdateringen lyckades
+                if ($pageUpdate) {
+                    header('Location: page.php');
+                    exit;
+                }
+            }
+        }
     }
 
-    print_r2($pageUpdate);
+
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
+    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+    $pageDelete = $page->delete_one($id);
+    // Kontrollera om raderingen lyckades
+    if ($pageDelete) {
+        // Omdirigera till en framgångssida eller visa ett framgångsmeddelande
+        header('Location: page.php');
+        exit;
+    }
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -64,26 +89,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
     <h1>Redigera en sida</h1>
     <?php
 
-
     // Creating a table for inserting the data in the database in the table ´page´
-    // if (isset($_POST['update'])) { 
-    
-    if (isset($_SESSION['user_id'])) { 
-    ?>
-    <form action="page_edit.php" method="POST" class="form1">
-        <p>
-            <input type="text" name="title" id="title" value="<?= $title ?>" required minlength="2" maxlength="25">
-            <hr>
-            <textarea name="content" id="content"  value="<?= $content ?>" cols="30" rows="10" required minlength="2" maxlength="255"></textarea>
-            <hr>
-            <input type="hidden" name="id" id="id" value= "<?= $id ?>">
-        </p>
-        <div>
-            <input type="submit" value="Uppdatera" name="update" class="button2">
-        </div>
-    </form>
+    if (isset($_SESSION['user_id'])) {
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+        $title = isset($_POST['title']) ? trim($_POST['title']) : "";
+        $content = isset($_POST['content']) ? trim($_POST['content']) : "";
+        ?>
+        <form action="page_edit.php" method="POST" class="form1">
+            <p>
+                <input type="text" name="title" id="title" value="<?= $title ?>" maxlength="25">
+                <hr>
+                <input type="text" name="content" id="content" value="<?= $content ?>" cols="30" rows="10" maxlength="255">
+                <hr>
+            </p>
+            <input type="text" name="id" value="<?= $id ?>">
+            <input type="hidden" name="user_id" id="user_id" value="<?= $_SESSION['user_id'] ?>">
+            <input type="submit" value="Spara" name="update" class="button2">
+            <input type="submit" value="Ta bort" name="delete" class="button2">
 
-    <?php
+        </form>
+
+        <?php
     }
     ?>
 </body>

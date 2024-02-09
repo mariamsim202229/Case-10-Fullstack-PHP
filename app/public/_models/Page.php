@@ -57,10 +57,10 @@ class Page extends Database
         // MySQL returns an id - last insterted Id...
         return $this->db->lastInsertId();
     }
-    public function edit_page($title, $content)
+    public function edit_page($id, $title, $content)
     {
-        $stmt = $this->db->prepare("UPDATE `page` SET `title`= :title,`content`= :content WHERE id = :id");
-
+        $stmt = $this->db->prepare("UPDATE `page` SET `title`= :title,`content`= :content WHERE id = ?");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(":title", $title, PDO::PARAM_STR);
         $stmt->bindParam(":content", $content, PDO::PARAM_STR);
         return $stmt->rowCount();

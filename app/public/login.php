@@ -31,9 +31,14 @@ setup_user($pdo);
     <h1>Login</h1>
     <form action="" method="post">
         <label for="username">Username: </label>
+        <br>
         <input type="text" name="username" id="username">
+        <br>
+        <br>
         <label for="password">Password: </label>
+        <br>
         <input type="password" name="password" id="password">
+        <br>
         <button type="submit">Login</button>
     </form>
 
@@ -58,9 +63,9 @@ setup_user($pdo);
 
         $is_correct_password = password_verify($form_password, $user['password']);
         if ($is_correct_password) {
-            header("location: pages.php");
+            header("location: page.php");
         } else {
-            header("location: pages.php");
+            header("location: login.php");
             exit();
         }
 
@@ -68,12 +73,6 @@ setup_user($pdo);
         // skapa sessionsvariabler som kan användas 
         $_SESSION['username'] = $user['username'];
         $_SESSION['user_id'] = $user['id'];
-
-        // redirect to start page
-        // header("location: index.php");
-        // } catch (PDOException $err) {
-        //     echo "There was a problem: " . $err->getMessage();
-        // }
     
     }
 

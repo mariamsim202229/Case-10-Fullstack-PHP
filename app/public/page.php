@@ -8,13 +8,45 @@ include "_includes/header.php";
 
 $database = new Database();
 $page = new Page();
+// $id = 0;
+$title = "";
+$content = "";
+$user_id = $_SESSION['user_id'];
+$edit_link = "";
+$date_created = date('Y-m-d H:i:s');
 
 // displaying pages and images retrieved from the database with the use of Class and Models
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $id = isset($_GET['id']) ? $_GET['id'] : null;
+
     $rows = $page->getAllPages();
-    $rowPage = $page->getPageById($id);
+    if ($rows) {
+        echo '<ul>';
+        foreach ($rows as $row) {
+            echo '<li><a href="page.php?id=' . $row['id'] . '">' . $row['title'] . '</a></li>';
+        }
+        echo '</ul>';
+    }
+    }
+ if ($_GET) { 
+    $id = isset($_GET['id']) ? $_GET['id'] : 0;
+    $row = $page->getPageById($id);
+    if ($row && isset($_GET['id']) && $_GET['id'] == $id) {
+      
+        $title = isset($_GET['title']) ? trim($_GET['title']) : "";
+        $content = isset($_GET['content']) ? trim($_GET['content']) : "";
+      
+        // $title = '';
+        // $content = '';
+        // foreach ($rows as $row) {
+        $title = $row['title'];
+        $content = $row['content'];
+        $date_created = $row['date_created'];
+        if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
+            $edit_link = '<a href="page_edit.php?id=' . $id . '"> UPDATE </a>';
+        }
+    }
 }
+// }
 ?>
 
 <!DOCTYPE html>
@@ -35,47 +67,43 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     <h1>Alla publicerade sidor</h1>
 
+    <div class="wrapper">
+        <main>
+            <h2>
+                <?php echo $title ?>
+            </h2>
+            <?php echo $content ?>
+            <?php echo $date_created ?>
+            <?php echo $edit_link ?>
+        </main>
+        <aside>
+            <!-- meny -->
+        </aside>
+    </div>
+
 
     <?php
     // Controlling that the array is not empty 
     // displaying the title of the pages published to the public
-    if (!empty($rows)) {
-        foreach ($rows as $row) {
-            $id = $row["id"];
-            $title = $row["title"];
-            echo "<li><a href='page.php?id=$id'>$title</a></li>";
-            // displaying the details of the page to the users who are signed in 
-            if ($rowPage && isset($_GET['id']) && $_GET['id'] == $id) {
+    
 
-                echo '<div class= "contentDiv">';
-                echo '<p>' . $row['content'] . '</p>';
-                echo 'Publicerad:';
-                echo $row['date_created'];
-                echo '<hr>';
-                echo 'Användare:';
-                echo $row['username'];
-                echo '<form action="page_edit.php" method="post">
-                            <input type="hidden" name="id" value="' . $id . '">
-                            <input type="submit" value="Ta bort" name="delete" class="button1">
-                        </form>';
-
-                // } else {
-                // Check if 'url' is an array and handle it appropriately
-                // if (isset($row['url'])) {
-                //     // foreach ($row['url'] as $url) {
-                //     echo $url . '<br>';
-                //     // }
-                // } else {
-                //     echo 'No URL available';
-                // }
-                // echo '</div>';
-                echo '<a href="page_edit.php?id= ' . $id . '</a> UPDATE';
-            }
-        }
-        echo '</div>';
-    } else {
-        echo 'No pages found.';
-    }
+    // } else {
+    // Check if 'url' is an array and handle it appropriately
+    // if (isset($row['url'])) {
+    //     // foreach ($row['url'] as $url) {
+    //     echo $url . '<br>';
+    //     // }
+    // } else {
+    //     echo 'No URL available';
+    // }
+    // echo '</div>';
+    
+    //         }
+    //     }
+    //     echo '</div>';
+    // } else {
+    //     echo 'No pages found.';
+    // }
     ?>
 
     <?

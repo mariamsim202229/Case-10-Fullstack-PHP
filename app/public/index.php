@@ -2,7 +2,7 @@
 
 session_start();
 
-$title = "En applikation för att publicera sidor";
+$title = "Applikation för att publicera sidor";
 
 include_once "_includes/database-connection.php";
 include_once "_includes/global-functions.php";
@@ -35,14 +35,12 @@ $pageModel = new Page();
     ?>
    <main>
             <h1><?php echo $title; ?></h1>
-            <div><?php echo $content ?></div>
         </main>
     <style>
         <?php include 'styles/styles.css'; ?>
     </style>
 
     <?php
-    $isLoggedIn = isset($_SESSION["username"]);
 
     include "_includes/footer.php";
     ?>

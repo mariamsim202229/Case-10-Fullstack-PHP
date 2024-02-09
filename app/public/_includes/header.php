@@ -1,6 +1,6 @@
 <header>
     <span><?= isset($_SESSION['username']) ? $_SESSION['username'] : ""; ?></span>
-    <span><?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ""; ?></span>
+    <!-- <span><?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ""; ?></span> -->
 
     </header>
 
