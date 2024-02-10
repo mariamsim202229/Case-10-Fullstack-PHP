@@ -36,6 +36,8 @@ if (isset($_SESSION['user_id'])) {
             $date_created = $row['date_created'];
             print_r2($row);
             include "handleUpload.php";
+
+    // Creating a table for inserting the data in the database in the table ´page´
             echo ' <form action="page_edit.php" method="POST" class="form1">
             <p>
                 <input type="text" name="title" id="title" value=" ' . $title . ' " maxlength="25">
@@ -50,7 +52,7 @@ if (isset($_SESSION['user_id'])) {
             <input type="submit" value="Ta bort" name="delete" class="button2">
 
         </form>';
-        if ($row && isset($_POST['update'])) {
+        if (isset($_POST['update'])) {
             var_dump($_POST);
             $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
             $title = isset($_POST['title']) ? trim($_POST['title']) : "";
@@ -97,20 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
     </style>
 
     <h1>Redigera en sida</h1>
-    <?php
+  
 
-    // Creating a table for inserting the data in the database in the table ´page´
-    if (isset($_SESSION['user_id'])) {
-        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
-     
-        // $title = isset($_GET['title']) ? trim($_GET['title']) : "";
-        // $content = isset($_GET['content']) ? trim($_GET['content']) : "";
-        ?>
-       
-
-        <?php
-    }
-    ?>
 </body>
 
 </html>

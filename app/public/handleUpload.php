@@ -4,7 +4,6 @@
 var_dump($_FILES);
 include_once "_includes/database-connection.php";
 include_once "_models/Image.php";
-include "_includes/header.php";
 
 // method for saving the url in the database
 $db = new Database();
