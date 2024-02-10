@@ -13,7 +13,6 @@ $title = "";
 $content = "";
 $user_id = $_SESSION['user_id'];
 $edit_link = "";
-$date_created = date('Y-m-d H:i:s');
 
 // displaying pages and images retrieved from the database with the use of Class and Models
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -26,27 +25,23 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         }
         echo '</ul>';
     }
-    }
- if ($_GET) { 
+}
+if ($_GET) {
     $id = isset($_GET['id']) ? $_GET['id'] : 0;
+
     $row = $page->getPageById($id);
     if ($row && isset($_GET['id']) && $_GET['id'] == $id) {
-      
+
         $title = isset($_GET['title']) ? trim($_GET['title']) : "";
         $content = isset($_GET['content']) ? trim($_GET['content']) : "";
-      
-        // $title = '';
-        // $content = '';
-        // foreach ($rows as $row) {
-        $title = $row['title'];
+     
         $content = $row['content'];
-        $date_created = $row['date_created'];
+        // $date_created = $row['date_created'];
         if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
             $edit_link = '<a href="page_edit.php?id=' . $id . '"> UPDATE </a>';
         }
     }
 }
-// }
 ?>
 
 <!DOCTYPE html>
@@ -67,13 +62,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     <h1>Alla publicerade sidor</h1>
 
-    <div class="wrapper">
+    <div class="contentDiv">
         <main>
-            <h2>
-                <?php echo $title ?>
-            </h2>
+            <?php echo $title ?>
+            <hr>
             <?php echo $content ?>
-            <?php echo $date_created ?>
+            <br>
+            <br>
             <?php echo $edit_link ?>
         </main>
         <aside>

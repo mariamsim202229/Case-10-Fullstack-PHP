@@ -19,12 +19,9 @@ $title = "";
 $content = "";
 $user_id = "";
 $user_id = $_SESSION['user_id'];
+$date_created = date('Y-m-d H:i:s');
 
 // Preparing variables used in the form 
-
-// $id = isset($_GET['id']) ? $_GET['id'] : null;
-// $url = isset($_GET['url']) ? $_GET['url'] : '';
-// $page_id = isset($_GET['page_id']) ? $_GET['page_id'] : null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_SESSION['user_id'])) {
@@ -33,8 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
         $title = isset($_POST['title']) ? trim($_POST['title']) : "";
         $content = isset($_POST['content']) ? trim($_POST['content']) : "";
-        // $date_created = date('Y-m-d H:i:s');
-        // $user_id = isset($_POST['user_id']) ? (int) $_POST['user_id'] : 0;
         $pageId = $page->add_one($title, $content, $user_id);
         echo "function add_one return: $pageId";
         if ($pageId) {
@@ -43,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 
 ?>
 

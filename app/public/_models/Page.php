@@ -59,12 +59,12 @@ class Page extends Database
     }
     public function edit_page($id, $title, $content)
     {
-        $stmt = $this->db->prepare("UPDATE `page` SET `title`= :title,`content`= :content WHERE id = ?");
+        $stmt = $this->db->prepare("UPDATE `page` SET `title`= :title,`content`= :content WHERE id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(":title", $title, PDO::PARAM_STR);
         $stmt->bindParam(":content", $content, PDO::PARAM_STR);
-        return $stmt->rowCount();
-    //    return $stmt->execute();
+        // return $stmt->rowCount();
+       return $stmt->execute();
         // return $this->db->lastInsertId();
     }
 

@@ -15,10 +15,6 @@
         <br>
         <a href="page_create.php"> Skapa</a>
         <br>
-        <br>
-        <a href="page_edit.php"> Redigera</a>
-        <br>
-        <br>
         <?php
 
     if (!isset($_SESSION['username'])) {

@@ -199,10 +199,12 @@ li {
 }
 
 .contentDiv {
-   background-color: white;
+  border: 2px solid white;
+  border-radius: 12px;
    width: fit-content;
    height: fit-content;
    padding: 15px;
+   font-size: x-large;
 }
 
 ::placeholder {
@@ -216,7 +218,7 @@ li {
     border: 1px solid white;
     border-radius: 28px;
     width: fit-content;
-    height: 300px;
+    height: 200px;
     background-color: rgb(210, 169, 88);
     padding: 15px;
     align-items: center;
