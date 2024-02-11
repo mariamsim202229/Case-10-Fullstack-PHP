@@ -30,24 +30,12 @@ class Image extends Database
         $stmt->execute();
     }
 
-
     public function getImagesByPageId($page_id)
     {
-        try {
-            $stmt = $this->db->prepare("SELECT * FROM image JOIN page ON image.page_id = page.id  WHERE page_id = :page_id");
-            // $stmt->bindParam(':url', $url, PDO::PARAM_STR);
-            $stmt->bindParam(':page_id', $page_id, PDO::PARAM_INT);
-
-            // Debug: Print the executed SQL query
-            var_dump($stmt->queryString);
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-            var_dump($result);  // Move var_dump() here for debugging
-            return $result;
-
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
+        $stmt = $this->db->prepare("SELECT * FROM image JOIN page ON image.page_id = page.id  WHERE page_id = :page_id");
+        $stmt->bindParam(':page_id', $page_id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
     public function add_image($url, $page_id)
     {
@@ -55,10 +43,6 @@ class Image extends Database
         $stmt->bindParam(':page_id', $page_id, PDO::PARAM_INT);
         $stmt->bindParam(':url', $url);
         $stmt->execute([$url, $page_id]);
-
-        // Set values for parameters
-        // $url = 'some_value';
-        // $page_id = 'some_other_value';
         // MySQL returns an id - last insterted Id...
         return $this->db->lastInsertId();
     }
@@ -67,9 +51,7 @@ class Image extends Database
     {
         $stmt = $this->db->prepare("UPDATE `image` SET `url`= :url, WHERE id = :id");
         $stmt->bindParam(':url', $url);
-        // return $stmt->rowCount();
         return $stmt->execute();
-        // return $this->db->lastInsertId();
     }
     public function delete_image($id)
     {

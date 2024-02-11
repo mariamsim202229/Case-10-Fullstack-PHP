@@ -51,7 +51,6 @@ class Page extends Database
 
     public function add_one($title, $content, $user_id)
     {
-        // $date_created = date('Y-m-d H:i:s');
         $stmt = $this->db->prepare("INSERT INTO page (title, content, user_id) VALUES (?, ?, ?)");
         $stmt->execute([$title, $content, $user_id]);
         // MySQL returns an id - last insterted Id...

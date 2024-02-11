@@ -1,5 +1,5 @@
 /* Styles for screens with a maximum width of 600px */
-@media (max-width: 680px) {
+@media (max-width: 1080px) {
     body {
         font-size: 15px;
         background-color: rgb(19, 127, 127);
