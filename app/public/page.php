@@ -11,6 +11,8 @@ $database = new Database();
 $page = new Page();
 $imageModel = new Image();
 
+$id = 0;
+$pageTitle = "Alla sidor";
 $title = "";
 $content = "";
 $user_id = $_SESSION['user_id'];
@@ -42,19 +44,29 @@ if ($_GET) {
 
         $pageImages = $imageModel->getImagesByPageId($id);
         if ($pageImages) {
+
+            $id = isset($_GET['id']) ? $_GET['id'] : 0;
             echo '<div>';
             foreach ($pageImages as $pageImage) {
-                echo '<img src="' . $pageImage['url'] . '">';
+                // $image = $pageImage['id'];
+                echo '<img src="' . $pageImage['url'] . '" alt="database image" width="400" height="225">
+                <br>
+                <br>
+                <a href="image_edit.php?id=' . $id . '" class="button1"> Ta bort bild </a>   <br>   <br>';
+
             }
             echo '</div>';
         } else {
             echo '<p>No images found for this page</p>';
         }
         if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
-            $edit_link = '<a href="page_edit.php?id=' . $id . '"> UPDATE </a>';
+            $edit_link = '<a href="page_edit.php?id=' . $id . '"> Redigera sidan </a>';
+
         }
     }
 }
+
+
 
 ?>
 
@@ -69,12 +81,10 @@ if ($_GET) {
 </head>
 
 <body>
-
     <style>
         <?php include 'styles/styles.css'; ?>
     </style>
-
-    <h1>Alla publicerade sidor</h1>
+    <?php $pageTitle ?>
 
     <div class="contentDiv">
         <main>
@@ -83,10 +93,9 @@ if ($_GET) {
             <?php echo $content ?>
             <br>
             <br>
-            <?php echo $url ?>
-            <br>
-            <br>
             <?php echo $edit_link ?>
+          
+
         </main>
         <aside>
             <!-- meny -->

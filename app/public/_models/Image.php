@@ -61,4 +61,14 @@ class Image extends Database
         // return number of affected rows
         return $stmt->rowCount();
     }
+
+    public function deleteImagesByPageId($page_id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM `image` WHERE page_id = :page_id");
+        $stmt->bindParam(':page_id', $page_id, PDO::PARAM_INT);
+        $stmt->execute();
+        // return number of affected rows
+        return $stmt->rowCount();
+    }
+
 }

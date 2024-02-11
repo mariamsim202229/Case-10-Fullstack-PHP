@@ -1,6 +1,5 @@
 <?php
 
-var_dump($_FILES);
 include_once "_includes/database-connection.php";
 include_once "_models/Image.php";
 
@@ -8,13 +7,13 @@ include_once "_models/Image.php";
 $db = new Database();
 //creating a new model for the class Image 
 $imageModel = new Image();
+
 $page_id = "";
+
 
 
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    var_dump($_POST);
     if (isset($_FILES['upload'])) {
 
         $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
@@ -32,6 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($imageId > 0) {
                 echo "<p>Successfull insertion into table 'image' with id: " . $imageId . "</p>";
+
+                include "_includes/header.php";
             }
         }
     }
@@ -55,12 +56,14 @@ if (isset($_SESSION['user_id'])) {
 <?php
 }
 ?>
-<form action="handleUpload.php" method="post" enctype="multipart/form-data">
-    <fieldset>
-        <legend>Ladda upp bild till sidan</legend>
+<form action="handleUpload.php" method="post" enctype="multipart/form-data" class="form1">
         <label for="upload">Välj bild</label>
-        <input type="file" name="upload" id="upload">
+        <br>
+        <br>
+        <input type="file" name="upload" id="upload" class="button">
         <input type="text" name="page_id" value="<?= $id ?>">
-        <input type="submit" value="Ladda upp">
-    </fieldset>
+        <br>
+        <br>
+        <input type="submit" value="Ladda upp" class="button">
 </form>
+
