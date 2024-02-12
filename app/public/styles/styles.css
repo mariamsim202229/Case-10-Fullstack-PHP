@@ -201,7 +201,7 @@ li {
 .contentDiv {
   border: 2px solid white;
   border-radius: 12px;
-   width: fit-content;
+   width: 300px;
    height: fit-content;
    padding: 15px;
    font-size: x-large;
@@ -218,7 +218,7 @@ li {
     border: 1px solid white;
     border-radius: 28px;
     width: fit-content;
-    height: 200px;
+    height: 250px;
     background-color: rgb(210, 169, 88);
     padding: 15px;
     align-items: center;

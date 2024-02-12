@@ -1,6 +1,5 @@
 <header>
-    <span><?= isset($_SESSION['username']) ? $_SESSION['username'] : ""; ?></span>
-    <!-- <span><?= isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ""; ?></span> -->
+   <div> <?= isset($_SESSION['username']) ? $_SESSION['username'] : ""; ?> </div>
 
     </header>
 
@@ -15,11 +14,12 @@
         <br>
         <a href="page_create.php"> Skapa</a>
         <br>
+        <br>
         <?php
 
     if (!isset($_SESSION['username'])) {
         echo '<a href="login.php">Logga in</a> <hr>';
-        // echo '<br>';
+        echo '<br>';
         echo '<a href="register.php">Registrera</a>';
     } else {
          echo '<br>';

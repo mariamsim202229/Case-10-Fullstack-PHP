@@ -15,7 +15,6 @@ $id = 0;
 $pageTitle = "Alla sidor";
 $title = "";
 $content = "";
-$user_id = $_SESSION['user_id'];
 $edit_link = "";
 $page_id = "";
 $url = "";
@@ -28,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if ($rows) {
         echo '<ul>';
         foreach ($rows as $row) {
-            echo '<li><a href="page.php?id=' . $row['id'] . '">' . $row['title'] . '</a></li>';
+            echo '<li><a href="page.php?id=' . $row['id'] . '">' . $row['title'] . '<br> <br>', "publicerad:", $row['date_created'] . '</a></li>';
         }
         echo '</ul>';
     }
@@ -42,6 +41,7 @@ if ($_GET) {
         $content = isset($_GET['content']) ? trim($_GET['content']) : "";
         $content = $row['content'];
 
+
         $pageImages = $imageModel->getImagesByPageId($id);
         if ($pageImages) {
 
@@ -49,24 +49,22 @@ if ($_GET) {
             echo '<div>';
             foreach ($pageImages as $pageImage) {
                 // $image = $pageImage['id'];
-                echo '<img src="' . $pageImage['url'] . '" alt="database image" width="400" height="225">
-                <br>
-                <br>
-                <a href="image_edit.php?id=' . $id . '" class="button1"> Ta bort bild </a>   <br>   <br>';
+                echo '<img src="' . $pageImage['url'] . '" alt="database image" width="300" height="170"> <br> <br>';
 
-            }
+            } 
+                if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
+                '<a href="image_edit.php?id=' . $id . '" class="button1"> Ta bort bild </a>   <br>   <br>';
+            } 
             echo '</div>';
         } else {
             echo '<p>No images found for this page</p>';
         }
+      
         if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
             $edit_link = '<a href="page_edit.php?id=' . $id . '"> Redigera sidan </a>';
-
         }
     }
 }
-
-
 
 ?>
 
@@ -86,18 +84,22 @@ if ($_GET) {
     </style>
     <?php $pageTitle ?>
 
+  
+   
+        
     <div class="contentDiv">
         <main>
-            <?php echo $title ?>
             <hr>
             <?php echo $content ?>
             <br>
             <br>
             <?php echo $edit_link ?>
-          
-
         </main>
+       
         <aside>
-            <!-- meny -->
+      
+        <br>
+
         </aside>
-    </div>
+        </div>
+   
