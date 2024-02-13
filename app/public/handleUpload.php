@@ -31,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($imageId > 0) {
                 echo "<p>Successfull insertion into table 'image' with id: " . $imageId . "</p>";
-
                 include "_includes/header.php";
             }
         }
@@ -61,7 +60,7 @@ if (isset($_SESSION['user_id'])) {
         <br>
         <br>
         <input type="file" name="upload" id="upload" class="button">
-        <input type="text" name="page_id" value="<?= $id ?>">
+        <input type="hidden" name="page_id" value="<?= $id ?>">
         <br>
         <br>
         <input type="submit" value="Ladda upp" class="button">

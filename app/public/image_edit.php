@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 //starting a session 
 session_start();
 
@@ -52,4 +52,4 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
 
 </body>
 
-</html>
+</html> -->

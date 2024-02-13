@@ -21,9 +21,14 @@ $title = "";
 $content = "";
 $user_id = $_SESSION['user_id'];
 
+$form_title= "";
+$form_content= "";
+
+
 
 if (isset($_SESSION['user_id'])) {
-
+  
+        include "handleUpload.php";
 
     if ($_GET) {
 
@@ -31,45 +36,31 @@ if (isset($_SESSION['user_id'])) {
         $row = $page->getPageById($id);
         if ($row) {
 
+         
             $id = $row['id'];
-            $title = $row['title'];
-            $content = $row['content'];
-            $date_created = $row['date_created'];
-
-            include "handleUpload.php";
-
-            // Creating a table for inserting the data in the database in the table ´page´
-            echo ' <form action="page_edit.php" method="POST" class="form1">
-            <p>
-                <input type="text" name="title" id="title" value=" ' . $title . ' " maxlength="25">
-                <hr>
-                <input type="text" name="content" id="content" value=" ' . $content . ' " cols="30" rows="10"
-                    maxlength="255">
-                <hr>
-            </p>
-            <input type="text" name="id" value=" ' . $id . ' ">
-            <input type="hidden" name="user_id" id="user_id" value=" ' . $_SESSION['user_id'] . ' ">
-            <input type="submit" value="Spara" name="update" class="button">
-            <input type="submit" value="Ta bort" name="delete" class="button1">
-
-        </form>';
+            $form_title = $row['title'];
+            $form_content = $row['content'];
+            $created = $row['date_created'];
+        }
             if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['update'])) {
-
-
+                var_dump($_POST);
                 $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-                $title = isset($_POST['title']) ? trim($_POST['title']) : "";
-                $content = isset($_POST['content']) ? trim($_POST['content']) : "";
-                $pageUpdate = $page->edit_page($id, $title, $content);
+                $form_title = isset($_POST['title']) ? trim($_POST['title']) : "";
+                $form_content = isset($_POST['content']) ? trim($_POST['content']) : "";
+                $pageUpdate = $page->edit_page($id, $form_title, $form_content);
 
                 // Kontrollera om uppdateringen lyckades
                 if ($pageUpdate) {
-                    header('Location: page_edit.php');
-                    exit;
+                    header('Location: page.php');
                 }
+                else {
+                    echo "cannot update page";
+                }
+                print_r2($pageUpdate);
             }
         }
     }
-}
+
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
     var_dump($_POST);
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
@@ -90,8 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
             header('Location: page.php');
             exit;
         }
-
-
     }
 }
 
@@ -112,14 +101,46 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
         <?php include 'styles/styles.css'; ?>
     </style>
 
-    Ta bort alla bilder från sidan
-    <form action="page_edit.php" method="post">
+<?php
 
-        <input type="text" name="page_id" value="<?= $id ?>">
-        <input type="hidden" name="user_id" id="user_id" value=" <? $_SESSION['user_id'] ?> ">
-        <input type="submit" value="ta bort" name="<? $imagesDelete ?>" class="button">
 
-    </form>
+    // Creating a table for inserting the data in the database in the table ´page´
+    // if (isset($_POST['update'])) { 
+
+    if (isset($_SESSION['user_id'])) 
+    ?>
+    
+
+    <form action="page_edit.php" method="POST" class="form1">
+            <p>
+            <label>  Redigera och ta bort </label>
+                <input type="text" name="title" id="title" value="<?php echo $form_title ?>" maxlength="25">
+                <hr>
+                <input type="text" name="content" id="content" value="<?php echo $form_content ?>" cols="30" rows="10"
+                    maxlength="255">
+                <hr>
+            </p>
+            <input type="text" name="id" id="id" value="<?php echo $id ?>">
+
+            <input type="submit" value="Ta bort" name="delete" class="button1">
+
+        </form>
+
+        <form action="page_edit.php" method="POST" class="form1">
+            <p>
+            <label>  Redigera och ta bort </label>
+                <input type="text" name="title" id="title" value="<?php echo $form_title ?>" maxlength="25">
+                <hr>
+                <input type="text" name="content" id="content" value="<?php echo $form_content ?>" cols="30" rows="10"
+                    maxlength="255">
+                <hr>
+            </p>
+            <input type="text" name="id" id="id" value="<?php echo $id ?>">
+            <input type="submit" value="Spara" name="update" class="button">
+
+        </form>
+
+    
 
 </body>
 

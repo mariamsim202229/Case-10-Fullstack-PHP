@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if ($rows) {
         echo '<ul>';
         foreach ($rows as $row) {
-            echo '<li><a href="page.php?id=' . $row['id'] . '">' . $row['title'] . '<br> <br>', "publicerad:", $row['date_created'] . '</a></li>';
+            echo '<li><a href="page.php?id=' . $row['id'] . '">' . $row['title'] . '---',  "användare:",  $row['username'] . '---', "datum:", $row['date_created'] . '</a></li>';
         }
         echo '</ul>';
     }
@@ -82,7 +82,7 @@ if ($_GET) {
     <style>
         <?php include 'styles/styles.css'; ?>
     </style>
-    <?php $pageTitle ?>
+    <?php echo $pageTitle ?>
 
   
    
