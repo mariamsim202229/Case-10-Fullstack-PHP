@@ -29,7 +29,7 @@ setup_user($pdo);
     <?php include "_includes/header.php"; ?>
 
     <h1>Login</h1>
-    <form action="" method="post">
+    <form action="" method="post" class="form1">
         <label for="username">Username: </label>
         <br>
         <input type="text" name="username" id="username">

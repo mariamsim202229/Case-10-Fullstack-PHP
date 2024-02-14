@@ -31,7 +31,7 @@ setup_user($pdo);
     ?>
 
     <h1>Register</h1>
-    <form action="" method="post">
+    <form action="" method="post" class="form1">
         <label for="username">Username: </label>
         <input type="text" name="username" id="username">
 

@@ -10,9 +10,7 @@ $imageModel = new Image();
 
 $page_id = "";
 
-
-
-// Check if the form was submitted
+// logic for submitting a file to the database, based on its id, url, and the page_id
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES['upload'])) {
 
@@ -24,19 +22,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $file_tmp = $_FILES['upload']['tmp_name'];
         $url = "uploads/" . $file_name;
 
-        // ev kontroll om filen redan finns...
         if (move_uploaded_file($file_tmp, $url)) {
             // lägg till bildens url i databasens tabell image
             $imageId = $imageModel->add_image($url, $page_id);
 
             if ($imageId > 0) {
                 echo "<p>Successfull insertion into table 'image' with id: " . $imageId . "</p>";
-                include "_includes/header.php";
+               header("Location: page.php");
             }
+        } else {
+            echo "<p> Not successful</p>";
         }
     }
-} else {
-    echo "<p> Not successful</p>";
+
 }
 
 ?>
@@ -54,12 +52,14 @@ if (isset($_SESSION['user_id'])) {
 ?>
 <?php
 }
+
+//a form for uploading files and inserting it into database, table image
 ?>
-<form action="handleUpload.php" method="post" enctype="multipart/form-data" class="form1">
+<form action="handleUpload.php" method="post" enctype="multipart/form-data" class="form2">
         <label for="upload">Välj bild</label>
         <br>
         <br>
-        <input type="file" name="upload" id="upload" class="button">
+        <input type="file" name="upload" id="upload" class="button4">
         <input type="hidden" name="page_id" value="<?= $id ?>">
         <br>
         <br>

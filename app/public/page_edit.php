@@ -38,6 +38,7 @@ if (isset($_SESSION['user_id'])) {
         } else {
             echo "cannot update page";
         }
+
         print_r2($pageUpdate);
     }
 }
