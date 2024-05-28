@@ -16,8 +16,8 @@ $user = new User();
 $imageModel = new Image();
 $title = "";
 $content = "";
-$user_id = "";
-$user_id = $_SESSION['user_id'];
+// $user_id = "";
+// $user_id = $_SESSION['user_id'];
 $date_created = date('Y-m-d H:i:s');
 
 

@@ -9,7 +9,28 @@ include_once "_models/User.php";
 
 
 setup_user($pdo);
-?>
+
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // get user data from form
+        $form_username = $_POST['username'];
+        $form_hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+        // send to database
+        $sql_statement = "INSERT INTO `user` (`username`, `password`) VALUES ('$form_username', '$form_hashed_password')";
+
+        try {
+            $result = $pdo->query($sql_statement);
+            if ($result->rowCount() == 1) {
+                // if OK redirect to login page
+                header("location: login.php");
+            }
+        } catch (PDOException $err) {
+            echo "There was a problem: " . $err->getMessage();
+        }
+    }
+
+    ?>
 
 <html lang="en">
 
@@ -41,27 +62,7 @@ setup_user($pdo);
         <button type="submit">Register</button>
     </form>
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // get user data from form
-        $form_username = $_POST['username'];
-        $form_hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-        // send to database
-        $sql_statement = "INSERT INTO `user` (`username`, `password`) VALUES ('$form_username', '$form_hashed_password')";
-
-        try {
-            $result = $pdo->query($sql_statement);
-            if ($result->rowCount() == 1) {
-                // if OK redirect to login page
-                header("location: login.php");
-            }
-        } catch (PDOException $err) {
-            echo "There was a problem: " . $err->getMessage();
-        }
-    }
-
-    ?>
+    
 
 
     <?php

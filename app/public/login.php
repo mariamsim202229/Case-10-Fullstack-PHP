@@ -9,6 +9,40 @@ include_once "_models/User.php";
 
 
 setup_user($pdo);
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // get user data from form
+    $form_username = $_POST['username'];
+    $form_password = $_POST['password'];
+
+    // send to database
+    $sql_statement = "SELECT * FROM `user` WHERE `username` = '$form_username'";
+
+    // try {
+    $result = $pdo->query($sql_statement);
+    $user = $result->fetch();
+
+    // no user found with these credentials
+    if (!$user) {
+        header("location: login.php");
+        exit();
+    }
+
+    $is_correct_password = password_verify($form_password, $user['password']);
+    if ($is_correct_password) {
+        header("location: page.php");
+    } else {
+        header("location: login.php");
+        exit();
+    }
+    // när rätt lösenord är angivet är användaren känd
+    // skapa sessionsvariabler som kan användas 
+    $_SESSION['username'] = $user['username'];
+    $_SESSION['user_id'] = $user['id'];
+}
+
+
 ?>
 
 <html lang="en">
@@ -42,41 +76,7 @@ setup_user($pdo);
         <button type="submit">Login</button>
     </form>
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // get user data from form
-        $form_username = $_POST['username'];
-        $form_password = $_POST['password'];
-
-        // send to database
-        $sql_statement = "SELECT * FROM `user` WHERE `username` = '$form_username'";
-
-        // try {
-        $result = $pdo->query($sql_statement);
-        $user = $result->fetch();
-
-        // no user found with these credentials
-        if (!$user) {
-            header("location: login.php");
-            exit();
-        }
-
-        $is_correct_password = password_verify($form_password, $user['password']);
-        if ($is_correct_password) {
-            header("location: page.php");
-        } else {
-            header("location: login.php");
-            exit();
-        }
-
-        // när rätt lösenord är angivet är användaren känd
-        // skapa sessionsvariabler som kan användas 
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['user_id'] = $user['id'];
-    
-    }
-
-    ?>
+   
 
     <?php
     include "_includes/footer.php";

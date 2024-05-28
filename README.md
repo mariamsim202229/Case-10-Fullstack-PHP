@@ -5,7 +5,7 @@
 
 Min fullstack PHP applikation visar sidor som är skapade av alla användaren till publiken , även om inte inloggad. 
 
-För att skapa själp sidor, redigera, ta bort, och lägga till bilder, behöver en användare registrera sig och logga in. 
+För att skapa själv sidor, redigera, ta bort, och lägga till bilder, behöver en användare registrera sig och logga in. 
 
 En session börjar när en användare loggar in, och session slutar när den loggar ut från applikation. 
 

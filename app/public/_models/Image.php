@@ -53,10 +53,10 @@ class Image extends Database
         $stmt->bindParam(':url', $url);
         return $stmt->execute();
     }
-    public function delete_image($id)
+    public function delete_image($image_id)
     {
         $stmt = $this->db->prepare("DELETE FROM `image` WHERE id = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $image_id, PDO::PARAM_INT);
         $stmt->execute();
         // return number of affected rows
         return $stmt->rowCount();

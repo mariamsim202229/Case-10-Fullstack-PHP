@@ -13,6 +13,7 @@ $imageModel = new Image();
 
 //variables for the app
 $id = 0;
+$image_id = "";
 $pageTitle = "Alla sidor";
 $title = "";
 $content = "";
@@ -43,32 +44,56 @@ if ($_GET) {
         $title = isset($_GET['title']) ? trim($_GET['title']) : "";
         $content = isset($_GET['content']) ? trim($_GET['content']) : "";
         $content = $row['content'];
-
-        $pageImages = $imageModel->getImagesByPageId($id);
-        if ($pageImages) {
-            $id = isset($_GET['id']) ? $_GET['id'] : 0;
-            echo '<div>';
-            foreach ($pageImages as $pageImage) {
-                echo '<img src="' . $pageImage['url'] . '" alt="database image" width="300" height="170"> <br> <br>';
-            }
-            if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
-                '<a href="image_edit.php?id=' . $id . '" class="button1"> Ta bort bild </a>   <br>   <br>';
-            }
-            echo '</div>';
-        } else {
-            echo '<p>No images found for this page</p>';
-        }
-
-        // if user is logged in, an upload form is shows under the page which the user has created
-        // a link to editing the page is also displayed 
-        if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
-            include "handleUpload.php";
-            $edit_link = '<a href="page_edit.php?id=' . $id . '"> Redigera sidan </a>';
-        } else {
-            echo '<p> Inloggning krävs för att redigera eller för att lägga till bilder på sidan</p>';
-        }
     }
+       // if user is logged in, an upload form is shows under the page which the user has created
+    // a link to editing the page is also displayed 
+    if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
+        include "handleUpload.php";
+        $edit_link = '<a href="page_edit.php?id=' . $id . '"> Redigera sidan </a>';
+    } else {
+        echo '<p> Inloggning krävs för att redigera eller för att lägga till bilder på sidan</p>';
+    }
+  
+    $pageImages = $imageModel->getImagesByPageId($id);
+    if ($pageImages) {
+        echo '<div>';
+        foreach ($pageImages as $pageImage) {
+            $image_id = $pageImage['id'];
+
+            $url= $pageImage['url'];
+            // $image_id = isset($_GET['id']) ? $_GET['id'] : 0;
+            echo '<img src="' . $pageImage['url'] . '" alt="database image" width="300" height="170"> <br> <br>';
+            echo $image_id;
+            if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
+
+                echo ' <form action="page.php" method="POST" class="form1">
+                <button value="' . $image_id . '"> </button>
+                    <input type="submit" value="Ta bort" name="delete" class="button1"> <br>
+                      </form>';
+            }
+        }
+        echo '</div>';
+    } else {
+        echo '<p>No images found for this page</p>';
+    }
+       
+    }
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
+
+        var_dump($_POST);
+        $image_id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+
+            // radera från databasen med SQL 
+            $imageDelete = $imageModel->delete_image($image_id);
+
+            if ($imageDelete) {
+
+                header('Location: page.php');
+                exit;
+            }
+    
 }
+
 
 ?>
 

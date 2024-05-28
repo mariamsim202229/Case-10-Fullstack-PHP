@@ -54,6 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
         exit;
     }
 
+   
+    }
+
+   
+
     if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
         $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
         $pageDelete = $page->delete_one($id);
@@ -64,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
             exit;
         }
     }
-}
+
 if ($_GET) {
     $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
     $row = $page->getPageById($id);
@@ -98,6 +103,7 @@ if ($_GET) {
         <form action="page_edit.php" method="POST" class="form1">
             <p>
                 <label> Redigera och ta bort </label>
+                <br>
                 <input type="text" name="title" id="title" value="<?= $title ?>" maxlength="25">
                 <hr>
                 <input type="text" name="content" id="content" value="<?= $content ?>" cols="30" rows="10" maxlength="255">
