@@ -55,14 +55,12 @@ label {
 }
 
 .form2 {
-   
     max-width: 350px;
     padding: 5px;
     text-align: center;
     margin-left: 20px;
     font-size: 20px;
     border-radius: 12px;
-
 }
 
 input {

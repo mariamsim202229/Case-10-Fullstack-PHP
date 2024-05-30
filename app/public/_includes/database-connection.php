@@ -40,4 +40,3 @@ function setup_user($pdo)
 
        $pdo->exec($sql);
 }
-?>

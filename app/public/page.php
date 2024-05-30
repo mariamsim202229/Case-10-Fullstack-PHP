@@ -13,12 +13,12 @@ $imageModel = new Image();
 
 //variables for the app
 $id = 0;
-// $image_id = "";
+$image_id = "";
 $pageTitle = "Alla sidor";
 $title = "";
 $content = "";
 $edit_link = "";
-// $page_id = "";
+$page_id = "";
 $url = "";
 $user_id = $_SESSION['user_id'];
 $row = null;
@@ -47,7 +47,7 @@ if ($_GET) {
         $content = isset($_GET['content']) ? trim($_GET['content']) : "";
         $content = $row['content'];
     }
-       // if user is logged in, an upload form is shown under the page which the user has created
+    // if user is logged in, an upload form is shown under the page which the user has created
     // a link to editing the page is also displayed 
     if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
         include "handleUpload.php";
@@ -57,66 +57,57 @@ if ($_GET) {
     }
   
     $pageImages = $imageModel->getImagesByPageId($id);
+
     if ($pageImages) {
         echo '<div>';
         foreach ($pageImages as $pageImage) {
-            $image_id = $pageImage['id'];
-echo $image_id;
-            $url= $pageImage['url'];
-            $page_id = isset($_GET['page_id']) ? $_GET['page_id'] : null;
-
-            $image_id = isset($_GET['image_id']) ? $_GET['image_id'] : null;
-            echo '<img src="' . $pageImage['url'] . '" alt="database image" width="300" height="170"> <br> <br>';
+            $image_id = $pageImage['image_id'];
             echo $image_id;
-        
+            $url = $pageImage['url'];
+          
+            echo '<img src="' . $url . '" alt="database image" width="300" height="170"> <br> <br>';
+            // echo $image_id;
+
+            if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
+
+                echo ' <form action="page.php" method="POST" class="form1">
+                <input type="hidden" name="image_id" id="$image_id" value=" ' .  $image_id . '">
+                    <input type="submit" value="Ta bort en bild" name="delete" class="button1"> <br>
+                      </form>';
+                }
         }
+
         echo '</div>';
     } else {
         echo '<p>No images found for this page</p>';
     }
-       
-    }
 
+}
 
-
-
-      // if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
-
-                // echo ' <form action="page.php" method="POST" class="form1">
-                // <button value="' . $image_id . '"> </button>
-                //     <input type="submit" value="Ta bort" name="delete" class="button1"> <br>
-                //       </form>';
-            // }
-
-
-
-//     if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
-
-//         var_dump($_POST);
-//         $image_id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-
-//             // radera från databasen med SQL 
-//             $imageDelete = $imageModel->delete_image($image_id);
-
-//             if ($imageDelete) {
-
-//                 header('Location: page.php');
-//                 exit;
-//             }
-    
-// }
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
     var_dump($_POST);
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $imagesDelete = $imageModel->deleteImagesByPageId($id);
-
     if ($imagesDelete) {
         header("Location: page.php?id=$id");
         echo "successful deletion of images";
         exit;
     }
+}
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
+ 
+    $image_id = isset($_POST['image_id']) ? (int) $_POST['image_id'] : 0;
+    //   $image_id = isset($_GET['image_id']) ? $_GET['image_id'] : null;
+    $imageDelete = $imageModel->delete_image($image_id);
+
+    if ($imageDelete) {
+
+        header("Location: page.php?id=$page_id");
+        exit;
     }
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -152,10 +143,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
     if ($row && isset($_SESSION['user_id'])) {
         ?>
 
-<form action="page.php" method="POST" class="form1">
-<input type="hidden" name="id" id="id" value="<?= $id ?>">
-    <input type="submit" value="Ta bort alla bilder" name="delete" class="button1">
-    </form>
-<?php    
-}
-?>
+        <form action="page.php" method="POST" class="form1">
+            <input type="hidden" name="id" id="id" value="<?= $id ?>">
+            <input type="submit" value="Ta bort alla bilder" name="delete" class="button1">
+        </form>
+    <?php
+    }
+    ?>

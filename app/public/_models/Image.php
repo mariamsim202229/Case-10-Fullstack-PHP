@@ -19,7 +19,7 @@ class Image extends Database
     {
         // SQL to create table if it does not exist
         $sql = "CREATE TABLE IF NOT EXISTS image (
-        id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        image_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
         url varchar(255) NOT NULL,
         page_id int(11) NOT NULL,
         KEY `page_id` (`page_id`),
@@ -49,14 +49,14 @@ class Image extends Database
 
     public function edit_image($url)
     {
-        $stmt = $this->db->prepare("UPDATE `image` SET `url`= :url, WHERE id = :id");
+        $stmt = $this->db->prepare("UPDATE `image` SET `url`= :url, WHERE image_id = :image_id");
         $stmt->bindParam(':url', $url);
         return $stmt->execute();
     }
     public function delete_image($image_id)
     {
-        $stmt = $this->db->prepare("DELETE FROM `image` WHERE id = :id");
-        $stmt->bindParam(':id', $image_id, PDO::PARAM_INT);
+        $stmt = $this->db->prepare("DELETE FROM `image` WHERE image_id = :image_id");
+        $stmt->bindParam(':image_id', $image_id, PDO::PARAM_INT);
         $stmt->execute();
         // return number of affected rows
         return $stmt->rowCount();
