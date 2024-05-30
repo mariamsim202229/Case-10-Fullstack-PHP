@@ -66,7 +66,6 @@ if ($_GET) {
             $url = $pageImage['url'];
           
             echo '<img src="' . $url . '" alt="database image" width="300" height="170"> <br> <br>';
-            // echo $image_id;
 
             if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $row['user_id']) {
 
@@ -103,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
 
     if ($imageDelete) {
 
-        header("Location: page.php?id=$page_id");
+        header("Location: page.php");
         exit;
     }
 

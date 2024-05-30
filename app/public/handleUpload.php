@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<p> Not successful</p>";
         }
     }
-
 }
 
 ?>
