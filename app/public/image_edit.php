@@ -20,9 +20,7 @@ $id = 0;
 $user_id = $_SESSION['user_id'];
 
 
-
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
-
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $imageDelete = $imageModel->delete_image($id);
 

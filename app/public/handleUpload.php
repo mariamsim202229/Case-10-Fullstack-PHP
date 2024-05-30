@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($imageId > 0) {
                 echo "<p>Successfull insertion into table 'image' with id: " . $imageId . "</p>";
-               header("Location: page.php");
+               header("Location: page.php?id=$page_id");
             }
         } else {
             echo "<p> Not successful</p>";

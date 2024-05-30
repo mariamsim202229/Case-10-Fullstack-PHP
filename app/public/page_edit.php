@@ -25,7 +25,7 @@ $user_id = $_SESSION['user_id'];
 if (isset($_SESSION['user_id'])) {
 
     if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['update'])) {
-        var_dump($_POST);
+        // var_dump($_POST);
         $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
         $title = isset($_POST['title']) ? trim($_POST['title']) : "";
         $content = isset($_POST['content']) ? trim($_POST['content']) : "";
@@ -44,7 +44,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
-    var_dump($_POST);
+    // var_dump($_POST);
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $imagesDelete = $imageModel->deleteImagesByPageId($id);
 
@@ -53,11 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
         echo "successful deletion of images";
         exit;
     }
-
-   
     }
-
-   
 
     if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
         $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
