@@ -53,18 +53,18 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
         echo "successful deletion of images";
         exit;
     }
-    }
+}
 
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
-        $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-        $pageDelete = $page->delete_one($id);
-        // Kontrollera om raderingen lyckades
-        if ($pageDelete) {
-            // Omdirigera till en framgångssida eller visa ett framgångsmeddelande
-            header('Location: page.php');
-            exit;
-        }
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['delete'])) {
+    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+    $pageDelete = $page->delete_one($id);
+    // Kontrollera om raderingen lyckades
+    if ($pageDelete) {
+        // Omdirigera till en framgångssida eller visa ett framgångsmeddelande
+        header('Location: page.php');
+        exit;
     }
+}
 
 if ($_GET) {
     $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
@@ -95,6 +95,7 @@ if ($_GET) {
     ?>
     <?php
     if ($row && isset($_SESSION['user_id'])) {
+        include "handleUpload.php";
         ?>
         <form action="page_edit.php" method="POST" class="form1">
             <p>
@@ -113,4 +114,5 @@ if ($_GET) {
     }
     ?>
 </body>
+
 </html>

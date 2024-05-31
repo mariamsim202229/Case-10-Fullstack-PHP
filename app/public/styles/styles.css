@@ -9,6 +9,7 @@
 body {
     background-color: burlywood;
 }
+
 header {
     /* background-color: hotpink; */
     height: fit-content;
@@ -20,7 +21,7 @@ header {
 }
 
 footer {
-    background-color: beige;
+    /* background-color: beige; */
     font-size: 16px;
     font-family: fantasy;
     justify-items: center;
@@ -72,8 +73,9 @@ input {
     /* border: 2px solid white; */
 }
 
-a, span {
- 
+a,
+span {
+
     font-size: 20px;
     padding: 4px;
     border-radius: 12px;
@@ -81,7 +83,7 @@ a, span {
     justify-items: left;
     font-weight: bolder;
     font-family: fantasy;
-    background-color: beige;
+    text-decoration: none;
 }
 
 hr {
@@ -123,7 +125,7 @@ button {
     color: aliceblue;
 }
 
-.button4{
+.button4 {
     background-color: orange;
     font-size: 12px;
     font-family: fantasy;
@@ -147,7 +149,7 @@ h5 {
     font-size: 30px;
     text-align: left;
     font-weight: bold;
-    text-decoration: underline;
+    /* text-decoration: underline; */
     margin-left: 120px;
 }
 
@@ -222,12 +224,12 @@ li {
 }
 
 .contentDiv {
-  /* border: 2px solid white; */
-  border-radius: 12px;
-   width: 300px;
-   height: fit-content;
-   padding: 15px;
-   font-size: x-large;
+    /* border: 2px solid white; */
+    border-radius: 12px;
+    width: 300px;
+    height: fit-content;
+    padding: 15px;
+    font-size: x-large;
 }
 
 ::placeholder {
@@ -248,4 +250,3 @@ li {
     text-align: center;
     margin-left: 150px;
 }
-

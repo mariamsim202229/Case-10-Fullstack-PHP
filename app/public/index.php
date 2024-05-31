@@ -6,8 +6,10 @@ $title = "Applikation för att publicera sidor";
 
 include_once "_includes/database-connection.php";
 include_once "_includes/global-functions.php";
+include_once "_models/User.php";
 include_once "_models/Page.php";
 
+$userModel = new User();
 $pageModel = new Page();
 ?>
 
@@ -33,9 +35,9 @@ $pageModel = new Page();
     <?php
     include "_includes/error-message.php";
     ?>
-   <main>
-            <h1><?php echo $title; ?></h1>
-        </main>
+    <main>
+        <h1><?php echo $title; ?></h1>
+    </main>
     <style>
         <?php include 'styles/styles.css'; ?>
     </style>

@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($imageId > 0) {
                 echo "<p>Successfull insertion into table 'image' with id: " . $imageId . "</p>";
-               header("Location: page.php?id=$page_id");
+                header("Location: page.php?id=$page_id");
             }
         } else {
             echo "<p> Not successful</p>";
@@ -55,13 +55,12 @@ if (isset($_SESSION['user_id'])) {
 //a form for uploading files and inserting it into database, table image
 ?>
 <form action="handleUpload.php" method="post" enctype="multipart/form-data" class="form2">
-        <label for="upload">Välj bild</label>
-        <br>
-        <br>
-        <input type="file" name="upload" id="upload" class="button4">
-        <input type="hidden" name="page_id" value="<?= $id ?>">
-        <br>
-        <br>
-        <input type="submit" value="Ladda upp" class="button">
+    <label for="upload">Välj bild</label>
+    <br>
+    <br>
+    <input type="file" name="upload" id="upload" class="button4">
+    <input type="hidden" name="page_id" value="<?= $id ?>">
+    <br>
+    <br>
+    <input type="submit" value="Ladda upp" class="button">
 </form>
-

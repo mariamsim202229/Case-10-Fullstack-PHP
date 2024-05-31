@@ -1,31 +1,37 @@
 <header>
-   <div> <?= isset($_SESSION['username']) ? $_SESSION['username'] : ""; ?> </div>
+    <div> <?= isset($_SESSION['username']) ? $_SESSION['username'] : ""; ?> </div>
 
-    </header>
+</header>
 
-    <div class="headerDiv"> 
+<div class="headerDiv">
     <nav>
-    <br>
+        <br>
         <a href="/">Start</a> |
         <br>
         <br>
         <a href="page.php"> Visa alla sidor </a>
         <br>
         <br>
-        <a href="page_create.php"> Skapa</a>
+        <?php
+        if (isset($_SESSION['user_id'])) {
+            ?>
+            <a href="page_create.php"> Skapa</a>
+            <?php
+        }
+        ?>
         <br>
         <br>
         <?php
 
-    if (!isset($_SESSION['username'])) {
-        echo '<a href="login.php">Logga in</a> <hr>';
-        echo '<br>';
-        echo '<a href="register.php">Registrera</a>';
-    } else {
-         echo '<br>';
-        echo '<a href="logout.php">Logga ut</a>';
-    }
-    ?>
+        if (!isset($_SESSION['username'])) {
+            echo '<a href="login.php">Logga in</a> <hr>';
+            echo '<br>';
+            echo '<a href="register.php">Registrera</a>';
+        } else {
+            echo '<br>';
+            echo '<a href="logout.php">Logga ut</a>';
+        }
+        ?>
 </div>
-    </nav>
-    <hr>
+</nav>
+<hr>
