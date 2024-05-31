@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         foreach ($rows as $row) {
 
             echo
-                '<h1><a href="page.php?id=' . $row['id'] . '">' . $row['title'] . "-Användare:", $row['username'] . '</h1>';
+                '<h1><a href="page.php?id=' . $row['id'] . '">' . $row['title'] . "-Användare:", $row['username'] . '</a></h1>';
         }
         echo '</ul>';
     }
